@@ -2,6 +2,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import { useContext } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { SettingsContext, ThemeContext } from "../context";
 
 type Props = {

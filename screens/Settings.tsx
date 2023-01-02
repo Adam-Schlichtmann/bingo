@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import Modal from "react-native-modal";
 import { View, StyleSheet, Text, SafeAreaView, Switch } from "react-native";
+import Modal from "react-native-modal";
+
 import { SettingsContext, ThemeContext } from "../context";
 import { Header } from "../components";
 

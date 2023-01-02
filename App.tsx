@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
+
 import { Header, Footer } from "./components";
 import { SettingsContext, ThemeContext } from "./context";
 import { SettingsContextType } from "./context/Settings";
