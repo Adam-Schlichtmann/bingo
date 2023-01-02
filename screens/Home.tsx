@@ -10,8 +10,6 @@ import * as Speech from "expo-speech";
 
 import { Ball, Box, Button } from "../components";
 import {
-  settingsReducer,
-  initialSettingsState,
   gameReducer,
   resetGame,
   initialGameState,
@@ -19,7 +17,7 @@ import {
 } from "../reducers";
 import { getLetterFromNumber } from "../utils";
 import Toast from "react-native-toast-message";
-import { ThemeContext } from "../context";
+import { SettingsContext, ThemeContext } from "../context";
 
 const randomInt = (max: number) => {
   return Math.floor(Math.random() * max);
@@ -37,27 +35,27 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   const { color } = useContext(ThemeContext);
-  const [settings, settingsDispatch] = useReducer(
-    settingsReducer,
-    initialSettingsState
-  );
+  const { settings } = useContext(SettingsContext);
   const [game, gameDispatch] = useReducer(gameReducer, initialGameState);
 
   const callNumberCallback = async () => {
     const avail = game.numbers.filter((n) => !n.called && !n.disabled);
     if (avail.length) {
       const index = randomInt(avail.length - 1);
+
       try {
         const isSpeaking = await Speech.isSpeakingAsync();
         if (isSpeaking) {
           await Speech.stop();
         }
         gameDispatch(callNumber(avail[index].number));
-        await Speech.speak(
-          `${getLetterFromNumber(Number.parseInt(avail[index].number))} ${
-            avail[index].number
-          }`
-        );
+        if (settings.sound) {
+          await Speech.speak(
+            `${getLetterFromNumber(Number.parseInt(avail[index].number))} ${
+              avail[index].number
+            }`
+          );
+        }
       } catch (e) {
         Toast.show({
           type: "error",

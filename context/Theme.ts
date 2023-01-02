@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export type Theme = {
+export type ThemeContextType = {
   color: {
     light: string;
     mediumLight: string;
@@ -12,7 +12,7 @@ export type Theme = {
   };
 };
 
-export const defaultTheme: Theme = {
+export const defaultTheme: ThemeContextType = {
   color: {
     light: "#6da3b6",
     mediumLight: "#4b799a",
@@ -24,4 +24,4 @@ export const defaultTheme: Theme = {
   },
 };
 
-export default createContext(defaultTheme);
+export default createContext<ThemeContextType>(defaultTheme);
